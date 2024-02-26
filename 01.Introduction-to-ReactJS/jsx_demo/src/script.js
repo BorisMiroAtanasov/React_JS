@@ -1,6 +1,6 @@
 import '../node_modules/react/umd/react.production.min.js'
 import '../node_modules/react-dom/umd/react-dom.production.min.js'
-import React from 'react';
+//import React from 'react';
 
 const rootDomElement = document.getElementById('root');
 
