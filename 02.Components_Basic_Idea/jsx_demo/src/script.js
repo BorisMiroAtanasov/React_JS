@@ -8,11 +8,13 @@ const rootDomElement = document.getElementById('root');
  const root = ReactDOM.createRoot(rootDomElement);
 
 // non JSX components
+const FooterText = React.createElement('p', {},'All rights reserved R')
 
 function Footer(){
     const reactElement = React.createElement('div',
      {className:'site-footer'},
-     React.createElement('p', {},'All rights reserved')
+     FooterText
+     //React.createElement(FooterText) друг начин да подадем елемента
      )
      //console.log(reactElement);
      return reactElement
