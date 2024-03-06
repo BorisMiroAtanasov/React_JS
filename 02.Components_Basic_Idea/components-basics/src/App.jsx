@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import MovieList from "./components/MovieList";
 
 const Movies = [
     {
@@ -25,6 +26,7 @@ function App() {
   return (
     <div>
       <h1>My first dynamic React Application</h1>
+      <MovieList headingText="Filmi" secondaryText='Secondary Text'/>
     </div>
   );
 }
