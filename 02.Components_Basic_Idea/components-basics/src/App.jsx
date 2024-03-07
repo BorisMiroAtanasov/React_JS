@@ -1,24 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import MovieList from "./components/MovieList";
+import movies from "./assets/movies";
 
-const Movies = [
-    {
-        title: 'The Matrix',
-        description:'Description Here',
-
-},
-    {
-        title: 'Man of Steel',
-        description:'Description Here',
-
-},
-    {
-        title: 'Harry Potter',
-        description:'Description Here',
-
-}
-];
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,7 +10,8 @@ function App() {
   return (
     <div>
       <h1>My first dynamic React Application</h1>
-      <MovieList headingText="Filmi" secondaryText='Secondary Text'/>
+
+      <MovieList movies={movies} headingText="Movie List" />
     </div>
   );
 }
