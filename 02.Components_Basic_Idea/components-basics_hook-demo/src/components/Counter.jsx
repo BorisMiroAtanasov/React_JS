@@ -4,24 +4,39 @@ export default function Counter(props){
 const [count, setCount] = useState(0);
 
 const onIncrementClick = () => {
-    setCount(count + 1)
+    setCount(oldValue =>oldValue + 1) // за гоелми проекти - по-правилен начин 
+   // setCount(count + 1) // за малки проекти
 
 }
 // <button onClick={() => setCount(0)}>clear</button> 
-const clearCounterHendelr = () => {
+const clearCounterHendelr = (event) => {
+    console.log(event);
     setCount(0)
 
+}
+//First var.
+// if(count < 0){
+//     return(
+//         <h3>Invalid count!</h3>
+//     )
+// }
+
+let warning = null;
+
+if(count < 0){
+    warning = <p>Invalid count!</p>
 }
 
     return(
         <div>
-            <h1>Count</h1>
+            <h3>Count</h3>
+            {warning}
 
             <p>Count:{count}</p>
-            <button onClick={onIncrementClick}>+</button>
-            <button onClick={clearCounterHendelr}>clear</button>
-           
             <button onClick={() => setCount(count - 1)}>-</button>
+            <button onClick={clearCounterHendelr}>clear</button>
+            <button onClick={onIncrementClick}>+</button>
+           
         </div>
 
     )
