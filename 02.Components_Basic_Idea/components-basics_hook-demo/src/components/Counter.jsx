@@ -21,16 +21,19 @@ const clearCounterHendelr = (event) => {
 //     )
 // }
 
-let warning = null;
+// let warning = null;  // може undefid, не може {} - празен обект
 
-if(count < 0){
-    warning = <p>Invalid count!</p>
-}
+// if(count < 0){
+//     warning = <p>Invalid count!</p>
+// }
 
     return(
         <div>
             <h3>Count</h3>
-            {warning}
+            {count < 0 
+            ? <p>Invalid count!</p>
+            : <p>Valid count</p>
+        }
 
             <p>Count:{count}</p>
             <button onClick={() => setCount(count - 1)}>-</button>
