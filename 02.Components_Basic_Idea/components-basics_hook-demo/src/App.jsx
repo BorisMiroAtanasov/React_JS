@@ -11,7 +11,9 @@ function App() {
   return (
     <div>
       <h1>My first dynamic React Application</h1>
-      <Timer />
+
+      <Timer startTime={5}/>
+      
       <MovieList movies={movies} headingText="Movie List" />
     </div>
   );
