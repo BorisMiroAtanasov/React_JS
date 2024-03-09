@@ -15,7 +15,7 @@ export default function Timer(props){
 
     setTimeout(() => {
         setTime(time + 1);
-        console.log(`Current time = ${time}`);
+     //   console.log(`Current time = ${time}`);
 
     }, 1000)
 
