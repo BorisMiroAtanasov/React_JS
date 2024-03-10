@@ -36,7 +36,7 @@ function App() {
     setIsManualUpdate(true)
   }
   return (
-    <div>
+    <div className={styles.app}>
         <h3>Count: {count}</h3>
       <ul>
         {numbers.map ((number, index) =>(
