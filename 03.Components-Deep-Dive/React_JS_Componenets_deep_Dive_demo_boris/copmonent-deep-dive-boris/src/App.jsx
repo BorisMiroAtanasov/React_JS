@@ -1,11 +1,20 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-    const [numbers, setNumbers] = useState([1,2,3,4,5])
+    const [numbers, setNumbers] = useState([1,2,3,4,5]);
+
+    useEffect(() =>{
+        console.log('Mountin components');
+        
+    },[])
+    useEffect(() =>{
+        console.log('Update component - numbers');
+        
+    },[numbers])
 
   const onClick = () => {
-    setNumbers(oldState => oldState.slice(1))
+    setNumbers(oldState => oldState.slice(0 , oldState.length - 1))
   
   };
   return (
