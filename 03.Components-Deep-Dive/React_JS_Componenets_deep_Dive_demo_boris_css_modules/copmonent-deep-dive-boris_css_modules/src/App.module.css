@@ -1,0 +1,17 @@
+.numberList{
+    background-color: antiquewhite;
+
+}
+
+.listItem{
+    list-style: none;
+    display: inline;
+    margin-left: 10px;
+    background-color: bisque;
+    padding: 10px;
+}
+
+.listItem:hover{
+    background-color: aqua;
+    cursor: pointer;
+}
