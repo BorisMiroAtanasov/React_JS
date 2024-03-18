@@ -1,15 +1,28 @@
 import { useEffect } from "react";
 import ToDoItem from "./ToDoItem";
+import { useState } from "react";
 
 export default function ToDoList(){
+    const [todos, setTodos] = useState([])
     useEffect(() => {
         fetch('http://localhost:3030/jsonstore/todos')
         .then(response => response.json())
         .then(data => {console.log(data)
+            const result = Object.values(data);
+            setTodos(result)
         }
         )
         .catch(err =>console.log(err))
     },[])
+
+    const changeStatusHendler = (todoId) =>{
+       // console.log(todoId);
+
+   //const state =  setTodos(state => state.map(todo =>todo._id === todoId ? console.log(todoId) : 'no'))
+       setTodos(state => state.map(todo =>todo._id === todoId ? {...todo, isCompleted :!todo.isCompleted} : todo))                  //state това е масива от всички стари todo-та
+
+       
+    }
 
 
 
@@ -40,7 +53,15 @@ export default function ToDoList(){
         </thead>
         <tbody>
 
-          {/* <ToDoItem /> */}
+          {todos.map( todo => (
+            <ToDoItem 
+            key={todo._id}
+            _id={todo._id}
+            text = {todo.text}
+            isCompleted = {todo.isCompleted}
+            changeStatusHendler={changeStatusHendler}
+            />
+          ))}
         
 
       
