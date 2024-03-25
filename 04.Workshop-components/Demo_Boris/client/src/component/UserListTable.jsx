@@ -21,7 +21,7 @@ export default function UserListTable() {
   }
   return (
     <div className="table-wrapper">
-          {showCreate &&  <CreateUserModal hideModal={hideCreateUserModal}/>}
+          {showCreate &&  <CreateUserModal onClose={hideCreateUserModal}/>}
 
       <table className="table">
         <thead>
