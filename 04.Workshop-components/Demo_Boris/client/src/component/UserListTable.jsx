@@ -7,7 +7,7 @@ export default function UserListTable() {
   const [users, setUsers] = useState([]);
   const [showCreate, setShowCreate ] = useState(false)
 
-  console.log(users);
+  //console.log(users);
   useEffect(() => {
     userService.getAll().then((result) => setUsers(result));
   }, []);
@@ -19,9 +19,23 @@ export default function UserListTable() {
   const hideCreateUserModal =() => {
     setShowCreate(false)
   }
+  const userCreatehandler = (e) => {
+    e.preventDefault()
+    setShowCreate(false)
+
+    const formData = new FormData(e.currentTarget);
+
+    console.log(formData.get('firstName'));
+
+  }
   return (
     <div className="table-wrapper">
-          {showCreate &&  <CreateUserModal onClose={hideCreateUserModal}/>}
+          {showCreate &&  (
+          <CreateUserModal 
+          onClose={hideCreateUserModal}
+          onUserCreate={userCreatehandler}
+          />
+          )}
 
       <table className="table">
         <thead>
