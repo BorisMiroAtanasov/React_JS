@@ -2,6 +2,7 @@ import UserListItem from "./UserListItem";
 import { useEffect, useState } from "react";
 import * as userService from "../services/userService";
 import CreateUserModal from "./CreateUserModal";
+import create from "babel-preset-react-app/create";
 
 export default function UserListTable() {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,9 @@ export default function UserListTable() {
 
   //console.log(users);
   useEffect(() => {
-    userService.getAll().then((result) => setUsers(result));
+    userService.getAll()
+    .then((result) => setUsers(result))
+    .catch((err) => console.log(err));
   }, []);
 
   const createUserClickHandler = () => {
@@ -19,14 +22,17 @@ export default function UserListTable() {
   const hideCreateUserModal =() => {
     setShowCreate(false)
   }
-  const userCreatehandler = (e) => {
+  const userCreatehandler = async (e) => {
     e.preventDefault()
     setShowCreate(false)
 
     const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
 
-    console.log(formData.get('firstName'));
+    const newUser = await userService.create(data)
 
+    setUsers  (state => [...state,newUser])
+    setShowCreate(false)
   }
   return (
     <div className="table-wrapper">
