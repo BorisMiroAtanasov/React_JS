@@ -6,42 +6,48 @@ import create from "babel-preset-react-app/create";
 
 export default function UserListTable() {
   const [users, setUsers] = useState([]);
-  const [showCreate, setShowCreate ] = useState(false)
+  const [showCreate, setShowCreate] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   //console.log(users);
   useEffect(() => {
-    userService.getAll()
-    .then((result) => setUsers(result))
-    .catch((err) => console.log(err));
+    userService
+      .getAll()
+      .then((result) => setUsers(result))
+      .catch((err) => console.log(err));
   }, []);
 
   const createUserClickHandler = () => {
-    setShowCreate(true)
+    setShowCreate(true);
   };
 
-  const hideCreateUserModal =() => {
-    setShowCreate(false)
-  }
+  const hideCreateUserModal = () => {
+    setShowCreate(false);
+  };
   const userCreatehandler = async (e) => {
-    e.preventDefault()
-    setShowCreate(false)
-
+    //stop page from refreshing
+    e.preventDefault();
+    //get date from form data
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-
-    const newUser = await userService.create(data)
-
-    setUsers  (state => [...state,newUser])
-    setShowCreate(false)
-  }
+    //create new user at the server
+    const newUser = await userService.create(data);
+    //add newly created user to the local state
+    setUsers((state) => [...state, newUser]);
+    //close the modal
+  };
+  const userInfoClickHandler = (userId) => {
+    console.log(userId);
+  };
   return (
     <div className="table-wrapper">
-          {showCreate &&  (
-          <CreateUserModal 
+      {showCreate && (
+        <CreateUserModal
           onClose={hideCreateUserModal}
           onUserCreate={userCreatehandler}
-          />
-          )}
+        />
+      )}
+      {showInfo && <showUserInfoModal onClick={() => setShowInfo(false)} />}
 
       <table className="table">
         <thead>
@@ -142,21 +148,25 @@ export default function UserListTable() {
         </thead>
         <tbody>
           {/* <!-- Table row component --> */}
-          {users.map(user => (
-            <UserListItem 
-            key={user._id}
-            firstName = {user.firstName}
-            lastName = {user.lastName}
-            email = {user.email}
-            phoneNumber = {user.phoneNumber}
-            createdAt = {user.createdAt}
-            imageUrl = {user.imageUrl}
+          {users.map((user) => (
+            <UserListItem
+              key={user._id}
+              userId={user._id}
+              firstName={user.firstName}
+              lastName={user.lastName}
+              email={user.email}
+              phoneNumber={user.phoneNumber}
+              createdAt={user.createdAt}
+              imageUrl={user.imageUrl}
+          onInfoClick={userInfoClickHandler}
+
             />
           ))}
         </tbody>
       </table>
-      <button className="btn-add btn" onClick={createUserClickHandler}>Add new user</button>
-
+      <button className="btn-add btn" onClick={createUserClickHandler}>
+        Add new user
+      </button>
     </div>
   );
 }
