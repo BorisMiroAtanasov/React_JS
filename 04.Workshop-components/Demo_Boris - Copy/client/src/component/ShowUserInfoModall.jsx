@@ -2,10 +2,10 @@ import { useState, useEffect } from "react"
 import * as userService from '../services/userService'
 import { formatData } from "../utils/dataUtils";
 
-export default function ShowUserInfoModall(
+const ShowUserInfoModall = ({
   userId,
-    onClose,
-){
+  onClose,
+}) =>{
     const [user, setUser] = useState({});
     useEffect (() => {
         userService.getOne(userId)
@@ -43,7 +43,7 @@ export default function ShowUserInfoModall(
               <p>Phone Number: <strong>{user.phoneNumber}</strong></p>
               <p>
                 Address:
-                <strong> {user.address?.country}, {user.address?.city}, {user.address?.street} {user.address?.streetNumber} </strong>
+                <strong> {user.address?.country}, {user.address?.city}, {user.address?.street}, {user.address?.streetNumber} </strong>
               </p>
 
               <p>Created on: <strong>{formatData(user.createdAt)}</strong></p>
@@ -57,6 +57,8 @@ export default function ShowUserInfoModall(
     )
 }
 
+
+export default  ShowUserInfoModall
 
 
 //{user.address.country}, {user.address.city}, {user.address.street} {user.address.streetNumber}

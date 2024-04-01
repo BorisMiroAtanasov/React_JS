@@ -12,6 +12,7 @@ export default function UserListTable() {
   const [users, setUsers] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [showDelete , setShowDelete] = useState(false)
   const [selectedUser , setSelectedUser] = useState(null)
 
   //console.log(users);
@@ -62,10 +63,11 @@ setShowInfo(true)
 
             {showInfo && (
                 <ShowUserInfoModall
-                    onClose={() => setShowInfo(false)}
+                onClose={(() => setShowInfo(false))}
                     userId={selectedUser}
                 />
             )}
+            {showDelete && <UserDeleteModal />}
 
       <table className="table">
         <thead>

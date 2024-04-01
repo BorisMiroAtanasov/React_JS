@@ -37,12 +37,12 @@ export const create = async(data) => {
           streetNumber:data.streetNumber
         }
       }
-    const response = await fetch(baseUrl, {
+      const response = await fetch(baseUrl, {
         method: 'POST',
-        headers:{
-            'Content-type':"application/json"
+        headers: {
+            'Content-Type': 'application/json',
         },
-        body:JSON.stringify(body)
+        body: JSON.stringify(body),
     })
     const result = await response.json();
     console.log(result);
