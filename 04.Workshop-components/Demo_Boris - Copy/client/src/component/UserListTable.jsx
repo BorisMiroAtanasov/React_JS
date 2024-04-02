@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import * as userService from "../services/userService";
 import CreateUserModal from "./CreateUserModal";
 import ShowUserInfoModall from "./ShowUserInfoModall";
+import UserDeleteModal from "./UserDeleteModal"
 //import ShowUserInfoModal from "./ShowUserInfoModal"
 
-import create from "babel-preset-react-app/create";
 
 
-export default function UserListTable() {
+ const  UserListTable =() =>{
   const [users, setUsers] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
@@ -47,6 +47,23 @@ export default function UserListTable() {
 setShowInfo(true)
     
   };
+const deleteClickUserHandler = (userId) => {
+  //console.log(userId);
+ setSelectedUser(userId)
+ setShowDelete(true)
+}
+
+
+  const deleteUserHandler = async() =>{
+    // remove user from server
+    const result = await userService.remove(selectedUser);
+    //remove user from state
+    setUsers(state => state.filter(user =>user._id !== selectedUser))
+
+    // close the modal
+    setShowDelete(false);
+
+  }
   return (
     <div className="table-wrapper">
       {showCreate && (
@@ -67,7 +84,12 @@ setShowInfo(true)
                     userId={selectedUser}
                 />
             )}
-            {showDelete && <UserDeleteModal />}
+            {showDelete && (
+            <UserDeleteModal 
+            onClose={(() => setShowDelete(false))}
+            onDelete={deleteUserHandler}
+            />
+            )}
 
       <table className="table">
         <thead>
@@ -179,6 +201,7 @@ setShowInfo(true)
               createdAt={user.createdAt}
               imageUrl={user.imageUrl}
           onInfoClick={userInfoClickHandler}
+          onDeleteClick={deleteClickUserHandler}
 
             />
           ))}
@@ -190,3 +213,6 @@ setShowInfo(true)
     </div>
   );
 }
+
+
+export default   UserListTable 
