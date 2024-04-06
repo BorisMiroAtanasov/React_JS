@@ -1,5 +1,6 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import UserList from "./components/UserList";
 import "./styles.css";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div>
         <Header />
         <main className="main">
+          <UserList />
 
             
 
