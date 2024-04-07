@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import * as userService from "../services/userService";
 import UserListItem from "./UserListItem";
 import CreateUserModal from "./CreateUserModal";
+import UserInfoModal from "./UserInfoModal";
 
 export default function UserListTable(){
 
     const [users, setUsers] = useState([]);
-    const [showCreate, setShowCreate] = useState(false)
+    const [showCreate, setShowCreate] = useState(false);
+    const [showInfo, setShowInfo] = useState(false);
 
    // console.log(users);
 
@@ -27,26 +29,33 @@ export default function UserListTable(){
     };
 
     const userCreateHandler = async(e) => {
+        //stop page from refreshing
         e.preventDefault();
-        
+        //get data from form data
         const formDate = new FormData(e.currentTarget);
         const data = Object.fromEntries(formDate);
-        
+        //create new user at the server
         const newUser = await userService.create(data);
-        setUsers(state => [...state,newUser ])
+        //add newly created user
+        setUsers(state => [...state,newUser ]);
+        //close the modal
         setShowCreate(false);
+    }
 
-
+    const userInfoClickHandler =(userId) =>{
+        console.log(userId);
     }
  
     return(
         <div className="table-wrapper">
       {showCreate && (
       <CreateUserModal 
-      hideModal={hideCreateUserModal}
+      onClose={hideCreateUserModal}
       onUserCreate = {userCreateHandler}
       />
       )}
+
+      {showInfo && <UserInfoModal onClose={() => setShowInfo(false)}/>}
 
        
 
