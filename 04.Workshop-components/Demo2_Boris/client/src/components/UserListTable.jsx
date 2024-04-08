@@ -10,6 +10,7 @@ export default function UserListTable(){
     const [users, setUsers] = useState([]);
     const [showCreate, setShowCreate] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null)
 
    // console.log(users);
 
@@ -42,8 +43,11 @@ export default function UserListTable(){
         setShowCreate(false);
     }
 
-    const userInfoClickHandler =(userId) =>{
-        console.log(userId);
+    const userInfoClickHandler = async(userId) =>{
+        //console.log(userId);
+        setSelectedUser(userId);
+        setShowInfo(true)
+
     }
  
     return(
@@ -55,7 +59,7 @@ export default function UserListTable(){
       />
       )}
 
-      {showInfo && <UserInfoModal onClose={() => setShowInfo(false)}/>}
+      {showInfo && <UserInfoModal onClose={() => setShowInfo(false)} userId={selectedUser}/>}
 
        
 
@@ -118,6 +122,7 @@ export default function UserListTable(){
             {/* <!-- Table row component --> */}
           {users.map(user => (<UserListItem
             key = {user._id}
+            userId = {user._id}
             firstName ={user.firstName}
             lastName ={user.lastName}
             email ={user.email}
@@ -125,6 +130,8 @@ export default function UserListTable(){
             createdAt ={user.createdAt}
             updatedAt ={user.updatedAt}
             imageUrl = {user.imageUrl}
+            onInfoClick = {userInfoClickHandler}
+
     />
     ))}
           </tbody>

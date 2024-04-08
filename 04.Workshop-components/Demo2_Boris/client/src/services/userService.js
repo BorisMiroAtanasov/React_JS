@@ -1,43 +1,50 @@
 const baseUrl = 'http://localhost:3030/jsonstore/users';
 
-export  const getAll = async() =>{
+export const getAll = async () => {
 
-        const response = await fetch(baseUrl);
-        const result = await response.json()
+  const response = await fetch(baseUrl);
+  const result = await response.json()
 
-        const data = Object.values(result);
-        return data
-  
+  const data = Object.values(result);
+  return data
+
 
 }
 
-export const create = async(data) => {
+export const getOne = async (userId) => {
+  const response = await fetch(`${baseUrl}/${userId}`);
+  const result = await response.json();
 
-    const body = {
-        firstName:data. firstName,
-        lastName:data.lastName,
-        email:data.email,
-        imageUrl:data.imageUrl,
-        phoneNumber:data.phoneNumber,
-        createdAt: new Date().toISOString,
-        updatedAt: new Date().toISOString,
-        address: {
-          country:data.country,
-          city:data.city,
-          street:data.street,
-          streetNumber:data.streetNumber,
-        }
-      }
-   const respons =  await fetch (baseUrl , {
-    method:'POST',
-    headers:{
-        'content-Type': 'application/json'
+  return result
+}
+
+export const create = async (data) => {
+
+  const body = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    imageUrl: data.imageUrl,
+    phoneNumber: data.phoneNumber,
+    createdAt: new Date().toISOString,
+    updatedAt: new Date().toISOString,
+    address: {
+      country: data.country,
+      city: data.city,
+      street: data.street,
+      streetNumber: data.streetNumber,
+    }
+  }
+  const respons = await fetch(baseUrl, {
+    method: 'POST',
+    headers: {
+      'content-Type': 'application/json'
     },
     body: JSON.stringify(body)
-   })
+  })
 
-   const result = await respons.json()
-   console.log(result);
+  const result = await respons.json()
+  console.log(result);
 
-   return result
+  return result
 }
