@@ -4,12 +4,14 @@ import * as userService from "../services/userService";
 import UserListItem from "./UserListItem";
 import CreateUserModal from "./CreateUserModal";
 import UserInfoModal from "./UserInfoModal";
+import UserDeleteModal from "./UserDeleteModal";
 
 export default function UserListTable(){
 
     const [users, setUsers] = useState([]);
     const [showCreate, setShowCreate] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
+    const [showDelete, setShowDelete] = useState(false)
     const [selectedUser, setSelectedUser] = useState(null)
 
    // console.log(users);
@@ -48,6 +50,23 @@ export default function UserListTable(){
         setSelectedUser(userId);
         setShowInfo(true)
 
+    };
+    const deleteUserClickHandler = (userId) =>{
+      setSelectedUser(userId);
+      setShowDelete(true)
+    }
+
+
+    const deleteUserHandler = async() =>{
+      //remove user from server
+      const result = await userService.remove(selectedUser)
+
+      //remove user from state
+      setUsers(state =>state.filter(user => user._id != selectedUser) )
+
+
+      //close the modal
+      setShowDelete(false)
     }
  
     return(
@@ -59,7 +78,20 @@ export default function UserListTable(){
       />
       )}
 
-      {showInfo && <UserInfoModal onClose={() => setShowInfo(false)} userId={selectedUser}/>}
+      {showInfo && 
+      <UserInfoModal 
+      onClose={() => setShowInfo(false)}
+       userId={selectedUser}
+       />
+       };
+
+       {showDelete &&
+        <UserDeleteModal
+        onClose={() => setShowDelete(false)}
+        onDelete={deleteUserHandler}
+        />
+        }
+
 
        
 
@@ -131,6 +163,7 @@ export default function UserListTable(){
             updatedAt ={user.updatedAt}
             imageUrl = {user.imageUrl}
             onInfoClick = {userInfoClickHandler}
+            onDeleteClick = {deleteUserClickHandler}
 
     />
     ))}
