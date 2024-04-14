@@ -1,22 +1,26 @@
-//import { Fragment } from "react"
+import { useState } from "react";
 
-export default function UncontroledForm() {
-    const onSubmitHandler = (e) => {
-        e.preventDefault()
+export default function ControlledForm(){
+    const [userNameValue , setUserNamevalue] = useState('Ivo')
+    const userNameChangeHandler = (e) => {
+        setUserNamevalue(e.target.value)
 
-        const formData= new FormData(e.currentTarget);
-        console.log(formData.get('username'));
-        console.log(formData.get('password'));
     }
-  return (
-    // <Fragment> old
-    <>
-      <h1>Uncontroled Form</h1>
+    return (
+        <>
+      <h1>Controlled Form</h1>
 
-      <form onSubmit={onSubmitHandler}>
+      <form >
         <div>
           <label htmlFor="username">Username:</label>
-          <input type="text" name="username" id="username" />
+          <input 
+          type="text" 
+          name="username" 
+          id="username" 
+          value={userNameValue}
+          onChange={userNameChangeHandler}
+
+          />
         </div>
         <div>
           <label htmlFor="password">Password:</label>
@@ -32,6 +36,5 @@ export default function UncontroledForm() {
         </div>
       </form>
     </>
-    // </Fragment> old
-  );
+    )
 }
