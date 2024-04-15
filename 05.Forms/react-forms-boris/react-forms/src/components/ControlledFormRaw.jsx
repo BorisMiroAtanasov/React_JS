@@ -1,37 +1,31 @@
 import { useState } from "react";
 
-const formInitialState = {
-  username:'',
-  password:'',
-  age:'',
-}
-
-
 export default function ControlledForm(){
-  // обединен STATE
-  const [formValues, setFormValues] = useState(formInitialState)
+    const [userNameValue , setUserNamevalue] = useState('');
+    const [passwordValue , setPasswordvalue] = useState('');
+    const [ageValue , setAgevalue] = useState('')
+    const userNameChangeHandler = (e) => {
+        setUserNamevalue(e.target.value)
 
-    // const [userNameValue , setUserNamevalue] = useState('');
-    // const [passwordValue , setPasswordvalue] = useState('');
-    // const [ageValue , setAgevalue] = useState('')
-
-  const changeHandler = (e) => {
-    // console.log(e.target.name);
-    // console.log(e.target.value);
-    setFormValues(state => ({
-      ...state, 
-      [e.target.name]:e.target.value
-    }))
-    
-  }
-
+    }
     const resetFormHandler = () =>{
-     setFormValues(formInitialState)
+      setUserNamevalue('');
+      setPasswordvalue('');
+      setAgevalue('');
+    }
+
+    const passwordChangeHandler = (e) => {
+      setPasswordvalue(e.target.value)
+    }
+
+    const ageChangeHandler = (e) => {
+      setAgevalue(Number(e.target.value))
     }
 
     const submitHandler = () =>{
-      console.log(formValues);
-      
+      console.log(userNameValue);
+      console.log(passwordValue);
+      console.log(ageValue);
       resetFormHandler()
 
     }
@@ -44,10 +38,10 @@ export default function ControlledForm(){
           <label htmlFor="username">Username:</label>
           <input 
           type="text" 
-          name='username'
+          name="username" 
           id="username" 
-          value={formValues.username}
-          onChange={changeHandler}
+          value={userNameValue}
+          onChange={userNameChangeHandler}
           onBlur={() => console.log('onBlur')}
 
           />
@@ -56,20 +50,20 @@ export default function ControlledForm(){
           <label htmlFor="password">Password:</label>
           <input 
           type="password" 
-          name='password'
+          name="password" 
           id="password" 
-          value={formValues.password}
-          onChange={changeHandler}
+          value={passwordValue}
+          onChange={passwordChangeHandler}
           />
         </div>
         <div>
           <label htmlFor="age">Age:</label>
           <input 
           type="number" 
-          name='age'
+          name="age" 
           id="age"
-          value={formValues.age}
-          onChange={changeHandler}
+          value={ageValue}
+          onChange={ageChangeHandler}
            />
         </div>
         <div>
