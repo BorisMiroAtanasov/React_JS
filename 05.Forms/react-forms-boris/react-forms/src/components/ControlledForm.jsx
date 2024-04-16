@@ -20,11 +20,15 @@ export default function ControlledForm(){
     // const [ageValue , setAgevalue] = useState('')
 
   const changeHandler = (e) => {
+    let value = e.target.value
     // console.log(e.target.name);
     // console.log(e.target.value);
+    if(e.target.type === 'number'){
+      value = Number(e.target.value)
+    }
     setFormValues(state => ({
       ...state, 
-      [e.target.name]:e.target.value
+      [e.target.name]:value
     }))
     
   }
@@ -86,9 +90,11 @@ export default function ControlledForm(){
         </div>
         <div>
           <label htmlFor="gender">Gender</label>
-          <select name="gender" id="gender" onChange={changeHandler}>
-            <option value="f" defaultValue={formValues.gender === 'f'} >F</option>
-            <option value="m" defaultValue={formValues.gender === 'm'}>M</option>
+          <select name="gender" id="gender" onChange={changeHandler} value={formValues.gender}>
+            <option value="f"  >F</option>
+            <option value="m" >M</option>
+            {/* <option value="f" defaultValue={formValues.gender === 'f'} >F</option>
+            <option value="m" defaultValue={formValues.gender === 'm'}>M</option> */}
           </select>
         </div>
         <div>
