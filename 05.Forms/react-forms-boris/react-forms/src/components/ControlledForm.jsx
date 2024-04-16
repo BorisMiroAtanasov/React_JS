@@ -4,6 +4,10 @@ const formInitialState = {
   username:'',
   password:'',
   age:'',
+  gender: 'f',
+  swimming:false,
+  shopping:false,
+running:false,
 }
 
 
@@ -33,6 +37,14 @@ export default function ControlledForm(){
       console.log(formValues);
       
       resetFormHandler()
+
+    }
+    const onCheckboxHandler = (e) => {
+      setFormValues(state =>({
+        ...state,
+        [e.target.name]: e.target.checked
+      }))
+      
 
     }
     return (
@@ -71,6 +83,22 @@ export default function ControlledForm(){
           value={formValues.age}
           onChange={changeHandler}
            />
+        </div>
+        <div>
+          <label htmlFor="gender">Gender</label>
+          <select name="gender" id="gender" onChange={changeHandler}>
+            <option value="f" defaultValue={formValues.gender === 'f'} >F</option>
+            <option value="m" defaultValue={formValues.gender === 'm'}>M</option>
+          </select>
+        </div>
+        <div>
+          <h3>Hobbies</h3>
+          <label htmlFor="swimming">Swimming</label>
+          <input type="checkbox" name="swimming" id="swimming" checked={formValues.swimming} onChange={onCheckboxHandler}/>
+          <label htmlFor="shopping">Shopping</label>
+          <input type="checkbox" name="shopping" id="shopping"checked={formValues.shopping} onChange={onCheckboxHandler} />
+          <label htmlFor="running">Running</label>
+          <input type="checkbox" name="running" id="running" checked={formValues.running} onChange={onCheckboxHandler}/>
         </div>
         <div>
           <button type="button" onClick={submitHandler}>Register</button>
