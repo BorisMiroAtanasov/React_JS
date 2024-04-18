@@ -15,12 +15,22 @@ export default function ControlledForm({
   formRef,
 }){
   const usernameInputRef = useRef()
+  const isMountedRef = useRef(false)
   // обединен STATE
   
   const [formValues, setFormValues] = useState(formInitialState)
   useEffect(() =>{
     usernameInputRef.current.focus()
-  },[])
+  },[]);
+
+  // Executed only  on update
+  useEffect(() =>{
+    if (isMountedRef.current){
+      isMountedRef.current = true;
+      return
+    }
+    console.log('Form is updated');
+  })
     // const [userNameValue , setUserNamevalue] = useState('');
     // const [passwordValue , setPasswordvalue] = useState('');
     // const [ageValue , setAgevalue] = useState('')
