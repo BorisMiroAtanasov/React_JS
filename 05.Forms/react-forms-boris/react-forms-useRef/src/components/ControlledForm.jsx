@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const formInitialState = {
   username:'',
@@ -11,10 +11,16 @@ running:false,
 }
 
 
-export default function ControlledForm(){
+export default function ControlledForm({
+  formRef,
+}){
+  const usernameInputRef = useRef()
   // обединен STATE
+  
   const [formValues, setFormValues] = useState(formInitialState)
-
+  useEffect(() =>{
+    usernameInputRef.current.focus()
+  },[])
     // const [userNameValue , setUserNamevalue] = useState('');
     // const [passwordValue , setPasswordvalue] = useState('');
     // const [ageValue , setAgevalue] = useState('')
@@ -50,7 +56,8 @@ export default function ControlledForm(){
      setFormValues(formInitialState)
     }
 
-    const submitHandler = () =>{
+    const submitHandler = (e) =>{
+      e.preventDefault()
       console.log(formValues);
       
       resetFormHandler()
@@ -68,10 +75,11 @@ export default function ControlledForm(){
         <>
       <h1>Controlled Form</h1>
 
-      <form >
+      <form ref={formRef} onSubmit={submitHandler}>
         <div>
           <label htmlFor="username">Username:</label>
           <input 
+          ref={usernameInputRef}
           type="text" 
           name='username'
           id="username" 
@@ -123,7 +131,7 @@ export default function ControlledForm(){
           <input type="checkbox" name="running" id="running" checked={formValues.running} onChange={changeHandler}/>
         </div>
         <div>
-          <button type="button" onClick={submitHandler}>Register</button>
+          <button type="submit" >Register</button>
           <button type="button" onClick={resetFormHandler}>Reset</button>
         </div>
       </form>
