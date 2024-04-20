@@ -19,7 +19,7 @@ export default function ControlledForm({
   const isMountedRef = useRef(false)
   // обединен STATE
   const [formValues, setFormValues] = useState(formInitialState)
-  const [ageError , setAgeError] = useState('')
+  const [errors , setErrors] = useState({})
   useEffect(() =>{
     usernameInputRef.current.focus()
   },[]);
@@ -65,6 +65,7 @@ export default function ControlledForm({
 
     const resetFormHandler = () =>{
      setFormValues(formInitialState)
+     setErrors({})
     }
 
     const submitHandler = (e) =>{
@@ -81,9 +82,20 @@ export default function ControlledForm({
     //   }))
     // }
     const ageValidator = () =>{
-      console.log(formValues.age);
+     // console.log(formValues.age);
       if(formValues.age < 0 || formValues.age > 120){
-        setAgeError('Age should be between  0 and 120')
+        setErrors(state => ({
+          ...state,
+         age: 'Age should be between  0 and 120'
+        }));
+      }else{
+        if(errors.age){
+          setErrors(state => ({
+            ...state,
+           age: ''
+          }));
+
+        }
       }
 
     }
@@ -124,9 +136,10 @@ export default function ControlledForm({
           value={formValues.age}
           onChange={changeHandler}
           onBlur={ageValidator}
+          className={errors.age && styles.inputError}
            />
-           {ageError && (
-            <p className={styles.errorMessage}>{ageError}</p>
+           {errors.age && (
+            <p className={styles.errorMessage}>{errors.age}</p>
            )}
         </div>
         <div>
@@ -151,7 +164,7 @@ export default function ControlledForm({
           <input type="checkbox" name="running" id="running" checked={formValues.running} onChange={changeHandler}/>
         </div>
         <div>
-          <button type="submit" >Register</button>
+          <button type="submit" disabled={Object.values(errors).some(x =>x)}>Register</button>
           <button type="button" onClick={resetFormHandler}>Reset</button>
         </div>
       </form>
