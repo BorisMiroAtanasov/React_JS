@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import styles from './ControlledForm.module.css'
 
 const formInitialState = {
   username:'',
@@ -17,15 +18,15 @@ export default function ControlledForm({
   const usernameInputRef = useRef()
   const isMountedRef = useRef(false)
   // обединен STATE
-  
   const [formValues, setFormValues] = useState(formInitialState)
+  const [ageError , setAgeError] = useState('')
   useEffect(() =>{
     usernameInputRef.current.focus()
   },[]);
 
   // Executed only  on update
   useEffect(() =>{
-    if (isMountedRef.current){
+    if (!isMountedRef.current){
       isMountedRef.current = true;
       return
     }
@@ -78,9 +79,14 @@ export default function ControlledForm({
     //     ...state,
     //     [e.target.name]: e.target.checked
     //   }))
-      
-
     // }
+    const ageValidator = () =>{
+      console.log(formValues.age);
+      if(formValues.age < 0 || formValues.age > 120){
+        setAgeError('Age should be between  0 and 120')
+      }
+
+    }
     return (
         <>
       <h1>Controlled Form</h1>
@@ -117,7 +123,11 @@ export default function ControlledForm({
           id="age"
           value={formValues.age}
           onChange={changeHandler}
+          onBlur={ageValidator}
            />
+           {ageError && (
+            <p className={styles.errorMessage}>{ageError}</p>
+           )}
         </div>
         <div>
           <label htmlFor="gender">Gender</label>
