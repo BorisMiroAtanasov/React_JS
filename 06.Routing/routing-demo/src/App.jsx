@@ -6,6 +6,11 @@ import Contacts from "./components/Contacts";
 import Characters from "./components/Characters";
 import CharacterDetails from "./components/CharacterDetails";
 import NotFound from "./components/NotFound";
+//2 var nested routes
+// import AboutUs from "./components/AboutUs"
+// import OurMisiion from "./components/OurMission"
+// import OurValues from "./components/OurValues"
+
 
 function App() {
   return (
@@ -14,6 +19,11 @@ function App() {
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/about/*" element={<About />} />
+    {/* <Route path="/about" element={<About />} />
+            <Route path="/us" element={<AboutUs />}/>
+            <Route path="/mission" element={<OurMisiion />}/>
+            <Route path="/values" element={<OurValues />}/>
+// </Route > */} - заваряме доп. раоутъра
     <Route path="/contacts" element={<Contacts />} />
     <Route path="/characters" element ={<Characters />} />
     <Route path="/characters/:id" element ={<CharacterDetails />} />

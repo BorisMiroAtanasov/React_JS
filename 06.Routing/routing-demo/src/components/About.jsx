@@ -1,4 +1,4 @@
-import { Link,Routes, Route } from "react-router-dom"
+import { Link,Routes, Route,useOutlet, Outlet } from "react-router-dom"
 import AboutUs from "./AboutUs"
 import OurMisiion from "./OurMission"
 import OurValues from "./OurValues"
@@ -20,6 +20,8 @@ const About = () => {
             <Route path="/values" element={<OurValues />}/>
             </Routes>
 
+            {/* //2 var nested routes
+            <Outlet/> */}
 
         </>
     )
