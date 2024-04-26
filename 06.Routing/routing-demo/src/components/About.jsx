@@ -1,9 +1,26 @@
+import { Link,Routes, Route } from "react-router-dom"
+import AboutUs from "./AboutUs"
+import OurMisiion from "./OurMission"
+import OurValues from "./OurValues"
+
+
 const About = () => {
     return(
         <>
         <h2>About Page</h2>
+        <nav>
+            <Link to="us">About us</Link>
+            <Link to="mission">Our mission</Link>
+            <Link to="values">Our values</Link>
+        </nav>
 
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta officia fugiat esse magni, tempore voluptatibus veniam maiores id error optio, asperiores sunt saepe pariatur voluptates accusamus earum reiciendis incidunt voluptatem!</p>
+        <Routes> 
+            <Route path="/us" element={<AboutUs />}/>
+            <Route path="/mission" element={<OurMisiion />}/>
+            <Route path="/values" element={<OurValues />}/>
+            </Routes>
+
+
         </>
     )
 }
