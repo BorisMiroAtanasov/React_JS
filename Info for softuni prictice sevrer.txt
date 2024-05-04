@@ -1,0 +1,8 @@
+
+download prictice server 
+
+
+1. npm install
+2. npm run client
+3. npm run build
+make a folder - named "data" 

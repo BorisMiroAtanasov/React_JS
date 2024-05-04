@@ -7,10 +7,16 @@ const baseUrl = 'https://swapi.py4e.com/api'
 const Characters =() => {
     const [characters, setCharacters] = useState([])
     useEffect(() =>{
-        fetch(`${baseUrl}/people`)
+const abortController = new AbortController()
+
+        fetch( `${baseUrl}/people`,{signal:abortController.signal})
         .then(res => res.json())
         .then(data =>
             setCharacters(data.results))
+
+            return ()=>{
+                abortController.abort()
+            }
     },[])
     return(
         <div className={styles.characterList}>
