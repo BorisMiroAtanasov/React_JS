@@ -1,18 +1,19 @@
-import ListGroup from 'react-bootstrap/ListGroup';
+import ListGroup from "react-bootstrap/ListGroup";
+import TodoItem from "./TodoItem";
+import Button from 'react-bootstrap/Button';
 
-export default function TodoList(){
-
-    return(
-        <ListGroup style={{width:'30%', margin: '0 auto'  }} >
-        <ListGroup.Item action >
-          Link 1
-        </ListGroup.Item>
-        <ListGroup.Item action >
-          Link 2
-        </ListGroup.Item>
-        <ListGroup.Item action >
-          This one is a button
-        </ListGroup.Item>
+export default function TodoList({
+    todos,
+}) {
+  return (
+    <div style={{ width: "30%", margin: "10px auto" }}>
+      <h1>Todo List</h1>
+      <ListGroup style={{marginBottom :'10px'}}>
+       {todos.map(x => <TodoItem key={x._id} {...x}/>)}
       </ListGroup>
-    )
+
+    <Button variant="primary">Add</Button>{' '}
+
+    </div>
+  );
 }
