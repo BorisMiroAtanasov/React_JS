@@ -5,12 +5,13 @@ import Button from 'react-bootstrap/Button';
 export default function TodoList({
     todos,
     onTodoAddClick,
+    onTodoDeleteClick
 }) {
   return (
     <div style={{ width: "30%", margin: "10px auto" }}>
       <h1>Todo List</h1>
       <ListGroup style={{marginBottom :'10px'}}>
-       {todos.map(x => <TodoItem key={x._id} {...x}/>)}
+       {todos.map(x => <TodoItem key={x._id} {...x} onTodoDeleteClick={onTodoDeleteClick}/>)}
       </ListGroup>
 
     <Button variant="primary" onClick={onTodoAddClick}>Add</Button>{' '}
