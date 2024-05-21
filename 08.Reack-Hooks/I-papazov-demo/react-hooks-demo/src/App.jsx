@@ -51,9 +51,25 @@ function App() {
     setTodos(state => state.filter( x=> x._id != todoId ))
 
   }
-  const contexValue = {
-    onTodoDeleteClick
+  const onTodoClick = async (todoId) =>{
+    const todo = todos.find( x => x._id === todoId )
+    const response = await fetch((`${baseUrl}/${todoId}`) ,{
+      method:"PUT", headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        ...todo,
+        isCoplited: !todo.isCoplited}),
+    })
+    setTodos(state => state.map( x=> x._id === todoId ? {...x, isCoplited: !x.isCoplited}: x))
+
   }
+  const contexValue = {
+    onTodoDeleteClick,
+    onTodoClick
+  }
+
+
 
   return (
     <TodoContext.Provider value={contexValue}>
