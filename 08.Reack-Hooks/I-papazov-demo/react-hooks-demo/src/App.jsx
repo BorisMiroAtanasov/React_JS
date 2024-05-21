@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { TodoContext } from "./context/TodoContext";
 import Header from "./components/Header";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -50,19 +51,23 @@ function App() {
     setTodos(state => state.filter( x=> x._id != todoId ))
 
   }
+  const contexValue = {
+    onTodoDeleteClick
+  }
 
   return (
-    <>
+    <TodoContext.Provider value={contexValue}>
+    <div>
       <Header />
 
       <TodoList 
       todos={todos} 
       onTodoAddClick={onTodoAddClick}
-      onTodoDeleteClick={onTodoDeleteClick}
        />
 
       <AddTodoModal show={showAddTodo} onTodoAddSubmit={onTodoAddSubmit} onTodoAddClose={onTodoAddClose} />
-    </>
+    </div>
+    </TodoContext.Provider>
   );
 }
 
