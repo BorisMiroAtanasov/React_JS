@@ -70,6 +70,8 @@ class App extends React.Component {
       todos: [],
       name: 'Pesho'
     }
+    // this.toggleTodo = this.toggleTodo.bind(this) - на това място също може да се байдне this да сочи към current terget - да е към един и същи контекс
+    // this.deleteTodo = this.deleteTodo.bind(this)
   }
 
 
@@ -92,6 +94,13 @@ class App extends React.Component {
     
     }
      
+
+    deleteTodo(todoId){
+      this.setState({
+        todos:this.state.todos.filter(todo => todo.id != todoId)
+
+      })
+    }
   
 
 
@@ -102,7 +111,10 @@ class App extends React.Component {
 
       {/* <h1>{this.state.name}</h1> */}
 
-      <TodoList todos={this.state.todos} toggleTodo={this.toggleTodo.bind(this)}/>
+      <TodoList todos={this.state.todos} 
+      toggleTodo={this.toggleTodo.bind(this)}
+      deleteTodo= {this.deleteTodo.bind(this)}
+      />
 
       </>
     )
