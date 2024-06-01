@@ -3,6 +3,7 @@ import React from 'react';
 
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
+import TodoList from './components/TodoList';
 
 const items = [
   {
@@ -62,9 +63,48 @@ const items = [
 ];
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      todos: [],
+      name: 'Pesho'
+    }
+  }
+
+
+  componentDidMount() {
+    
+    console.log('componentDidMount');
+    fetch('http://localhost:3030/jsonstore/todos')
+    .then(res =>res.json())
+    .then(result => { 
+      this.setState({
+        todos:Object.values(result)
+      })
+     
+    })
+  }
+
+  toggleTodo(todoId){
+    this.setState({
+      todos: this.state.todos.map(todo => todo.id === todoId ? {...todo, isCompleted: !todo.isCompleted} : todo)})
+    
+    }
+     
+  
+
+
   render(){
     return (
+      <>
       <Menu   mode="horizontal" items={items} />
+
+      {/* <h1>{this.state.name}</h1> */}
+
+      <TodoList todos={this.state.todos} toggleTodo={this.toggleTodo.bind(this)}/>
+
+      </>
     )
 
   }
