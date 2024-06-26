@@ -6,3 +6,10 @@ download prictice server
 2. npm run client
 3. npm run build
 make a folder - named "data" 
+
+
+
+
+библиотека за Валидации:
+Иво Папазов - formic
+zot, yup
