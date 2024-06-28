@@ -33,8 +33,11 @@ describe('calculator sum', () => {
     it('Shuoud  return negative number when adding , negative numbers', () => { // може да сложим "only" - изпълняваме само този тест
         expect(calculator.sum(-1, -2)).toBe(-3)
     })
-    it('Use undefinde as an argument', () => { 
+    test('Use undefinde as an argument', () => { 
         expect(calculator.sum(undefined, 1)).toBe(NaN)
+    })
+    test('use string as an argument', () => { 
+        expect(calculator.sum('1', 2)).toBe(3)
     })
 
 
@@ -42,5 +45,9 @@ describe('calculator sum', () => {
 
 
 describe('calculator divide', () => {
+
+    test('Shoud throw error when divide by zero', () => { 
+        expect(()=> calculator.divide(2,0)).toThrow('Devision by zero is not permited')
+    })
 
 })
