@@ -1,24 +1,46 @@
 import * as calculator from "./calculator"
 
+describe('calculator sum', () => {
 
-test('sum of positive number shoud be positive' , () =>{
-    /// AAA - arange - подготвя данните 
+    test('sum of positive number shoud be positive', () => {
+        /// AAA - arange - подготвя данните 
 
-    const first = 1; // може и let
-    const second = 2
-    const expectedResult = 3
+        const first = 1; // може и let
+        const second = 2
+        const expectedResult = 3
 
-    /// AAA - act - изпълнява 
+        /// AAA - act - изпълнява 
+        const actualResult = calculator.sum(first, second)
 
-    const actualResult = calculator.sum(first, second)
+        /// AAA -  assert - вижда резултата да ли отговря на желания резултат
 
+        expect(actualResult).toBe(expectedResult)
 
-    /// AAA -  assert - вижда резултата да ли отговря на желания резултат
+    })
+    // добре е да имаме негативен "case" в случая е трудно да се направи такъв за грешка с калколатора
+    // test('sum of positive number shoud return error', () => {
 
-    expect(actualResult).toBe(expectedResult)
+    //     const first = 1; // може и let
+    //     const second = 2
+    //     const expectedResult = 3
+
+    //     const actualResult = calculator.sum(first, second)
+
+    //     expect(actualResult).toBe(expectedResult)
+
+    // })
+
+    it('Shuoud  return negative number when adding , negative numbers', () => { // може да сложим "only" - изпълняваме само този тест
+        expect(calculator.sum(-1, -2)).toBe(-3)
+    })
+    it('Use undefinde as an argument', () => { 
+        expect(calculator.sum(undefined, 1)).toBe(NaN)
+    })
+
 
 })
 
-it('Shuoud  return negative number when adding , negative numbers' , () =>{
-    expect(calculator.sum(-1, -2)).toBe(-3)
+
+describe('calculator divide', () => {
+
 })
