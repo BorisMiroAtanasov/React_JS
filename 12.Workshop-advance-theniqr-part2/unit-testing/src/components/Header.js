@@ -1,7 +1,7 @@
 export default function Header(){
     return (
         <>
-        <h1>Unit Testing</h1>
+        <h1 className="heading">Unit Testing</h1>
 
         <nav>
        <a href="/">Home</a>
