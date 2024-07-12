@@ -1,10 +1,11 @@
 export default function Header(){
     return (
-        <div className="container-fluid sticky-top">
+  
+    <div className="container-fluid sticky-top">
         <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light p-0">
                 <a href="index.html" className="navbar-brand">
-                    <h2 className="text-white">Hairnic</h2>
+                    <h2 className="text-blue">Healty Life</h2>
                 </a>
                 <button type="button" className="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -32,5 +33,6 @@ export default function Header(){
             </nav>
         </div>
     </div>
+    
     )
 }
