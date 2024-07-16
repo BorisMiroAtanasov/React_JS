@@ -81,7 +81,7 @@ img.animated.pulse {
     color: var(--bs-dark);
     font-weight: 500;
     transition: .5s;
-    outline: none;
+    /* outline: none; */
 }
 
 .navbar .navbar-nav .nav-link:hover,

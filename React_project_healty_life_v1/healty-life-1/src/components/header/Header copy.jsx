@@ -2,7 +2,7 @@ export default function Header(){
     return (
   
     <div className="container-fluid sticky-top"  >
-        <div className="container">
+        <div className="container" >
             <nav className="navbar navbar-expand-lg navbar-light p-0">
                 <a href="index.html" className="navbar-brand">
                     <h2 className="text-blue">Healty Life</h2>
